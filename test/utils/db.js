@@ -6,14 +6,14 @@ import { wait } from 'promist';
 import { spawn } from 'child_process';
 import registerUtils from '~/index';
 
-RxDB.plugin(memory);
-RxDB.plugin(http);
-registerUtils(RxDB);
+RxDB.addRxPlugin(memory);
+RxDB.addRxPlugin(http);
+registerUtils(RxDB.addRxPlugin);
 
 const nameGen = () => 'a' + uuid().replace(/[^a-zA-Z0-9]/g, '');
 
 function setup(options) {
-  return RxDB.create({
+  return RxDB.createRxDatabase({
     name: nameGen(),
     adapter: 'memory',
     multiInstance: false,
